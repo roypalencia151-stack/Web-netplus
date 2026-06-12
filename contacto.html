@@ -85,11 +85,6 @@ h1,h2,h3,h4{font-family:var(--font-heading);color:var(--color-dark);line-height:
 .nav-menu ul{display:flex;gap:24px;align-items:center}
 .nav-menu ul a{font-weight:600;font-size:.95rem;color:var(--color-dark);transition:color .2s}
 .nav-menu ul a:hover,.nav-menu ul a.active-page{color:var(--color-primary)}
-.has-submenu{position:relative}
-.submenu{display:none;position:absolute;top:120%;left:0;background:#fff;box-shadow:var(--shadow);border-radius:12px;min-width:240px;padding:10px;z-index:50}
-.has-submenu.open .submenu{display:block}
-.submenu li a{display:block;padding:10px 14px;border-radius:8px;font-size:.9rem}
-.submenu li a:hover{background:var(--color-bg-alt)}
 .closebtn{display:none}
 .nav-phone{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem;color:var(--color-dark);white-space:nowrap}
 .nav-phone:hover{color:var(--color-primary)}
@@ -201,8 +196,6 @@ h1,h2,h3,h4{font-family:var(--font-heading);color:var(--color-dark);line-height:
   .nav-menu{position:fixed;top:0;right:-100%;height:100vh;width:280px;background:#fff;flex-direction:column;align-items:flex-start;padding:80px 25px;box-shadow:-5px 0 25px rgba(0,0,0,.1);transition:right .3s ease;z-index:600;gap:18px}
   .nav-menu.open{right:0}
   .nav-menu ul{flex-direction:column;align-items:flex-start;gap:6px;width:100%}
-  .submenu{position:static;box-shadow:none;display:none;padding-left:14px}
-  .has-submenu.open .submenu{display:block}
   .nav-phone,.nav-cta{margin-top:6px}
   .closebtn{display:block;position:absolute;top:18px;right:20px;font-size:1.8rem;background:none;border:none;color:var(--color-primary);cursor:pointer}
 }
@@ -223,14 +216,7 @@ h1,h2,h3,h4{font-family:var(--font-heading);color:var(--color-dark);line-height:
     <button type="button" class="closebtn" id="close-menu" aria-label="Cerrar menú">×</button>
     <ul id="main-menu-list">
       <li><a href="index.html">Inicio</a></li>
-      <li class="has-submenu">
-        <a href="servicios.html">Servicios <i class="fas fa-caret-down"></i></a>
-        <ul class="submenu">
-          <li><a href="servicios.html#residencial">Internet Residencial</a></li>
-          <li><a href="servicios.html#pyme">Internet PYME</a></li>
-          <li><a href="servicios.html#tv">TV &amp; Streaming</a></li>
-        </ul>
-      </li>
+      <li><a href="servicios.html">Servicios</a></li>
       <li><a href="nosotros.html">Nosotros</a></li>
       <li><a href="contacto.html" class="active-page">Contacto</a></li>
     </ul>
@@ -422,18 +408,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   if (menuToggle) menuToggle.addEventListener('click', openNav);
   if (closeMenu) closeMenu.addEventListener('click', closeNav);
-
-  document.querySelectorAll('.has-submenu > a').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      link.parentElement.classList.toggle('open');
-    });
-  });
-  document.addEventListener('click', function (e) {
-    document.querySelectorAll('.has-submenu.open').forEach(function (item) {
-      if (!item.contains(e.target)) item.classList.remove('open');
-    });
-  });
 
   // Formulario de contacto -> WhatsApp
   var contactForm = document.getElementById('contactForm');
